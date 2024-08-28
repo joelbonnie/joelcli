@@ -32,7 +32,7 @@ const CommandLine = ({ commands }) => {
         const output = commands[command]();
         setCommandHistory([...commandHistory, { input, output }]);
       } else {
-        setCommandHistory([...commandHistory, { input, output: 'Command Not Found :( Try typing help!\n' }]);
+        setCommandHistory([...commandHistory, { input, output: 'Command Not Found (｡•́︿•̀｡)  Try typing help!\n' }]);
       }
       
     
@@ -57,15 +57,14 @@ const CommandLine = ({ commands }) => {
   };
 
   const handleCAT = (fileName) => {
-    if (fileName === "") {
-      return `No such file: ${dirName}`;
-    } 
+
 
     for (let dir in currentDir) {
       if (currentDir[dir][fileName]) {
         return currentDir[dir][fileName];
       }
     }
+    return `No such file: ${fileName}`; 
   };
 
   return (
