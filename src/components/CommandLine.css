@@ -1,0 +1,38 @@
+.commandline {
+    background-color: #000;
+    color: #00FF00;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px;
+    height: 100%;
+    max-height: 500px;
+    width: 700px;
+    /* max-width: 2000px; */
+    overflow: auto;
+    border-radius: 5px;
+}
+
+.commandline-output {
+    background-color: inherit;
+    color: inherit;
+    text-align: left;  
+    white-space: pre-wrap;  
+}
+
+.commandline-prompt {
+    display: flex;
+    align-items: center;
+}
+
+.prompt-symbol {
+    margin-right: 10px;
+    color: inherit;
+}
+
+.commandline-input {
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+        

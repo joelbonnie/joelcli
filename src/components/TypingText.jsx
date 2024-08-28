@@ -40,8 +40,6 @@ const TypingText = ({strings, typingSpeed, pauseBetweenString, eraseSpeed}) => {
         typingSpeed,eraseSpeed, pauseBetweenString
     ]);
 
-    // const maxLength = Math.max(...strings.map(str => str.length));
-
     return (
         <div style={{
             display: 'flex',
@@ -51,7 +49,6 @@ const TypingText = ({strings, typingSpeed, pauseBetweenString, eraseSpeed}) => {
             fontSize: '10px',
             fontFamily: 'monospace', 
             whiteSpace:'pre',
-            // minWidth: `${maxLength}ch`,
             }}>
             <h3>{displayedText}</h3>
         </div>
