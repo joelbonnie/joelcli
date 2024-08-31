@@ -20,11 +20,34 @@ export const directories = {
   },
 
   projects: {
-    'project1' : 'project 1 desc',
-    'project2' : 'project 2 desc',
-    'project3' : 'project 3 desc',
-    'project4' : 'project 4 desc',
-    'project5' : 'project 5 desc',
+    'NatureNexus' : 'Developed an ecosystem management website using JavaScript and SQL\n '+
+    'enabling park rangers to track various flora/fauna and park proceedings.\n ' + 
+    'Implemented endpoints in Express to allow seamless integration of the React front end\n and the Oracle SQL database.',
+
+    'CShells' : 'Currently developing a shell implementation in C.\n ' + 
+    'Utilizes the C standard library to facilitate system calls to execute applications and manage processes.\n ' + 
+    'Provides functionality for command piping and redirecting, as well as running background processes.',
+    
+    'WouldTheyStay' : 'Developed a Logistic Regression model to predict employee attrition.\n '+
+    'Tidied data using the R Tidyverse packages.\n ' + 
+    'Partitioned data using a 70-30 Train-Test split and explored various methods such as\n Forward/Backward selection, LASSO and Ridge to optimize predictive performance.\n '+
+    'Used cross-validation to ensure an optimal ridge regularization parameter.',
+    
+    'JoelCLI' : 'This Website!\n Utilized React to engineer an innovative personal website having a shell interface\n ' + 
+    'Implemented shell commands such as ls and cat to navigate experiences, projects and more,\n drawing inspiration from Linux terminals.',
+    
+    'HealthStatLogger' : 'Developed a logging utility using Java to track body statistics during workouts,\n and visualize monthly progress through dynamic plots.\n ' + 
+    'Utilized a JUnit test suite to ensure methods and classes were adequately tested,\n achieving 100% line coverage.\n ' + 
+    'Engineered an intuitive GUI using Java Swing, leveraging JSON files\n for seamless data persistence and user interaction',
+
+    'CyberSecSalaries':'Analyzed sample CyberSec salaries from 2021 to 2022 to determine whether\n there was a statistically significant increase.\n '+
+    'Utilized both bootstrapping and theoretical results such as the Central Limit Theorem\n to conclude results.\n ' + 
+    'Conducted hypothesis testing using the infer package workflow, taking a significance level 0.10.\n ' + 
+    'Developed visual plots using the ggplot2 package to enhance the results presented.',
+
+    'TennisRankUp':"Analyzed tennis match data and player information to predict the player's\n Association of Tennis Professionals (ATP) ranking.\n " + 
+    "Used the player's height, age, and rank points as predictor variables to develop a K-NN regression model.\n "+
+    "Utilized Jupyter notebooks to demonstrate the dataset cleaning and wrangling steps,\n along with the regression modelling process.",
   },
 
   extracurriculars: {
