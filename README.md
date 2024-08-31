@@ -10,6 +10,7 @@ I wanted to do something with my personal website that reflects that. Yep! Navig
 
 ### Tips:
 - Type `help` to see an overview of the program.
+- Type `clear` to clear the screen!
 - Try typing `ls` to see the directories in root directory, such as `skills`, `education` etc.
 - To see the content of a particular directory you can type `ls [directoryName]`. Say, for example: `ls skills`.
 - To see the content of a particular entry/ file, you can use `cat [fileName]`. For example `cat ta` shows details about my TA experiences at UBC (fun!).
