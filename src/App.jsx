@@ -14,7 +14,7 @@ function App() {
   'mentor.', 'guitarist.','thunderbird.'];
 
   const typingSpeed= 100;
-  const pauseBetweenString = 1000;
+  const pauseBetweenString = 900;
   const eraseSpeed = 50;
   
 

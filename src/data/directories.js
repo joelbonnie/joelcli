@@ -62,3 +62,18 @@ export const directories = {
     'Bash Scripting, Virtualization and Hypervisors, Docker, LaTeX',
   },  
 }
+
+
+
+
+export const fileSystem = {
+  root: {
+    type: "directory",
+    children: {
+      temp: {
+        type: "file",
+        content: "this is a file"
+      },
+    },
+  },
+}

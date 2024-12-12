@@ -3,10 +3,26 @@ import { directories } from '../data/directories.js';
 import './CommandLine.css';
 
 const CommandLine = ({ commands }) => {
-  const [input, setInput] = useState('');
-  const [commandHistory, setCommandHistory] = useState([]);
-  const [currentDir, setCurrentDir] = useState(directories);
+  const introString = "Hi!"
 
+  const [input, setInput] = useState('');
+  const [commandHistory, setCommandHistory] = useState([{input:"", output:introString}]);
+  const [currentDir, setCurrentDir] = useState(directories);
+  const [currentPath, setCurrentPath] = useState('root');
+
+
+  const getDirectory = (path) => {
+    return path.reduce((dir, key) => dir.children[key], fileSystem);
+  };
+
+  const changeDirectory = (path, target) => {
+    const dir = getDirectory(path);
+    if (dir.children[target] && dir.children[target].type === 'directory') {
+      return [...path, target];
+    } else {
+      return path;
+    }
+  };
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
@@ -32,7 +48,7 @@ const CommandLine = ({ commands }) => {
         const output = commands[command]();
         setCommandHistory([...commandHistory, { input, output }]);
       } else {
-        setCommandHistory([...commandHistory, { input, output: 'Command Not Found (｡•́︿•̀｡)  Try typing help!\n' }]);
+        setCommandHistory([...commandHistory, { input, output: 'Command Not Found (｡•́︿•̀｡)  Try typing help\n' }]);
       }
       
     
@@ -94,10 +110,6 @@ const CommandLine = ({ commands }) => {
         fontFamily: 'monospace',
       }}
       rows={1}
-      // onInput={(e) => {
-      //   e.target.style.height = 'auto';
-      //   e.target.style.height = `${e.target.scrollHeight}px`;
-      // }}
       autoFocus
       />
       </div>
