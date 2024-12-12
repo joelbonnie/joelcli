@@ -46,7 +46,11 @@ const CommandLine = ({ commands }) => {
       } else if (command == 'cat') {
         const output = handleCAT(commandArg) + "\n";
         setCommandHistory([...commandHistory, {input, output}]);
-      
+     
+      } else if (command == 'echo') {
+        const output = commandArg+"\n"
+        setCommandHistory([...commandHistory, {input, output}]);
+
       } else if (command == 'clear') {
         setCommandHistory([]);
       
@@ -104,6 +108,8 @@ const CommandLine = ({ commands }) => {
 
     return `No such file: ${fileName}`; 
   };
+
+
 
   return (
     <div className="commandline"> 
