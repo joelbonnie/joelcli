@@ -5,6 +5,6 @@ export const introMessage = ""+
 "\t    _\\_\\ \\  \\ \\ \\/\\ \\  \\ \\  __\\   \\ \\ \\____  \\ \\  __\\   \\/_/\\_\\/_  \\ \\ \\  \\ \\  __ \\\n"+  
 "\t   /\\_____\\  \\ \\_____\\  \\ \\_____\\  \\ \\_____\\  \\ \\_____\\   /\\_\\/\\_\\  \\ \\_\\  \\ \\_\\ \\_\\\n"+ 
 "\t   \\/_____/   \\/_____/   \\/_____/   \\/_____/   \\/_____/   \\/_/\\/_/   \\/_/   \\/_/\\/_/\n\n\n"+ 
-"  Hi!! Welcome to my website :D\n  If you need any help using this terminal type help\n\n"
+"  Hi!! Welcome to my website :D\n  For a small guide on using this terminal type help\n\n"
                                                                                  
 
