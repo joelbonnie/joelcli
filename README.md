@@ -3,7 +3,8 @@
 
 ### My Personal Portfolio!
 
-If you've hung out with me in person/ online you'd know about my love for Linux. (I'm sorry in advance haha ʕっ•ᴥ•ʔっ💕 )
+If you've hung out with me in person/ online you'd know about my love for Linux. 
+(I'm sorry in advance haha ʕっ•ᴥ•ʔっ💕 )
 
 I wanted to do something with my personal website that reflects that. Yep! Navigating my projects, experiences, and more is done through a shell! 
 
