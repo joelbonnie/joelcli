@@ -112,37 +112,30 @@ const CommandLine = ({ commands }) => {
 
 
   return (
-    <div className="commandline"> 
-
-    <div className="commandline-output">
-      {commandHistory.map((entry, index) => (
-        <div key={index}>
-        <span> {entry.input} </span>
-        <div> {entry.output} </div>
+      <>
+        <div className="commandline">
+          <div className="commandline-output">
+            {commandHistory.map((entry, index) => (
+              <div key={index}>
+                <span>{entry.input}</span>
+                <div>{entry.output}</div>
+              </div>
+            ))}
+          </div>
+    
+          <div className="commandline-prompt">
+            <span className="prompt-symbol">&gt;</span>
+            <textarea
+              value={input}
+              className="commandline-input"
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
+              autoFocus
+            />
+          </div>
         </div>
-      ))}
-    </div>
-
-      <div className="commandline-prompt">
-        <span className='prompt-symbol'>&gt;</span>
-      
-      <textarea
-      value={input}
-      className="commandline-input"
-      onChange={handleInputChange}
-      onKeyDown = {handleKeyDown}
-      style={{
-        border:'none', 
-        outline: 'none',
-        // resize: 'none',
-        fontFamily: 'monospace',
-      }}
-      rows={1}
-      autoFocus
-      />
-      </div>
-    </div>
-  );
+      </>
+    );
 };
 
 

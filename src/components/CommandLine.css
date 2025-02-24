@@ -1,38 +1,64 @@
 .commandline {
-    background-color: #000;
-    color: #00FF00;
-    font-family: 'Courier New', Courier, monospace;
-    padding: 10px;
-    height: 100%;
-    max-height: 500px;
-    width: 700px;
-    /* max-width: 2000px; */
-    overflow: auto;
-    border-radius: 5px;
+  padding-top: 5vw;
+  padding-left: 20vw;
+  padding-right: 20vw;
+  flex-grow: 1;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-color: #1A1A1D; 
+  color: #F2E9E4; 
+  font-family: 'Monaco', monospace;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-size: 18px;
+
 }
 
 .commandline-output {
-    background-color: inherit;
-    color: inherit;
-    text-align: left;  
-    white-space: pre-wrap;  
-}
+  flex-grow: 0; 
+  overflow-y: auto; 
+  width: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  padding: 5px 10px; 
+  font-size: inherit;
+  background: transparent;
+  color: inherit;
+  white-space: pre-wrap; 
+  word-wrap: break-word; 
 
+
+}
 .commandline-prompt {
-    display: flex;
-    align-items: center;
-}
-
-.prompt-symbol {
-    margin-right: 10px;
-    color: inherit;
+  display: flex;
+  align-items: baseline; 
+  padding: 5px 10px;
+  width: 100%;
+  gap: 5px;
 }
 
 .commandline-input {
-    background-color: inherit;
-    color: inherit;
-    border: none;
-    outline: none;
-    width: 100%;
+  flex-grow: 1;
+  background: transparent;
+  color: inherit;
+  caret-color: #F2B3A2; 
+  font-size: inherit;
+  border: none;
+  outline: none;
+  resize: none;
+  width: 100%;
+  min-height: 24px;
+  line-height: 1.2; 
+  box-sizing: border-box;
 }
-        
+
+.prompt-symbol {
+  font-size: inherit;
+  line-height: 1.2; 
+  display: flex;
+  align-items: baseline; 
+  background: transparent;
+  color: #F2B3A2; 
+}
