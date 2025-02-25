@@ -70,23 +70,56 @@ export const fileSystem = {
   root: {
     type: "directory",
     children: {
-      temp: {
+      whoami: {
         type: "file",
-        content: "this is a file"
+        content: "Hi! I'm Joel Bonnie! I'm a fourth year student at UBC studying Computer Science and Statistics :D\n"
       },
-      newdir: {
+      education: {
         type: "directory",
         children: {
           temp: {
             type: "file",
-            content: "this is another file",
+            content: "this is a file"
           },
-          newdir2: {
-            type: "directory",
-            children: {},
         },
       },
+      experiences: {
+        type: "directory",
+        children: {
+          temp: {
+            type: "file",
+            content: "this is a file"
+          },
+        },
+      },
+      projects: {
+        type: "directory",
+        children: {
+          temp: {
+            type: "file",
+            content: "this is a file"
+          },
+        },
+      },
+      extracurriculars: {
+        type: "directory",
+        children: {
+          temp: {
+            type: "file",
+            content: "this is a file"
+          },
+        }
+      },
+      skills: {
+        type: "directory",
+        children: {
+          temp: {
+            type: "file",
+            content: "this is a file"
+          },
+        },
+      },  
     },
   },
-},
 }
+
