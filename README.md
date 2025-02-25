@@ -14,6 +14,8 @@ I wanted to do something with my personal website that reflects that. Yep! Navig
 - Try typing `ls` to see the directories in root directory, such as `skills`, `education` etc.
 - To see the content of a particular directory you can type `ls [directoryName]`. Say, for example: `ls skills`.
 - To see the content of a particular entry/ file, you can use `cat [fileName]`. For example `cat ta` shows details about my TA experiences at UBC (fun!).
-- Whatever you do, don't type `rickroll`! (˶ᵔ ᵕ ᵔ˶)
+- To change directories use the `cd` command. For example `cd skills` to go into the skills directory.
+
+- Whatever you do, don't type `nggyu`! (˶ᵔ ᵕ ᵔ˶)
 
 ʕ •ᴥ•ʔ Joel
