@@ -1,5 +1,5 @@
 .commandline {
-  padding-top: 5vw;
+  padding-top: 3vw;
   padding-left: 20vw;
   padding-right: 20vw;
   flex-grow: 1;
@@ -11,7 +11,7 @@
   font-family: 'Monaco', monospace;
   overflow: hidden;
   box-sizing: border-box;
-  font-size: 18px;
+  font-size: 15px;
 
 }
 

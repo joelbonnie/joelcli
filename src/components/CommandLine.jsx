@@ -32,9 +32,11 @@ const CommandLine = () => {
     "Some help with commands:\n"+
     "Try typing ls to see content of the root directory\nAnd ls [directoryName] to see the content of directory [directoryName]\n" +
     "Type cat [fileName] to view the content of file [fileName]\n"+
+    "Type cd [directoryName] to change the current directory.\n"+
     "Type clear to clear the screen!\n\n"+
+    "Definitely don't type nggyu (wink wink)\n\n"+
     "Have fun! ʕっ•ᴥ•ʔっ💕",
-    rickroll: () => "Never gonna give you up\nNever gonna let you down\n"+
+    nggyu: () => "Never gonna give you up\nNever gonna let you down\n"+
 "Never gonna run around and desert you\nNever gonna make you cry\n"+
 "Never gonna say goodbye\nNever gonna tell a lie and hurt you\n\n ʕ •`ᴥ•´ʔ\n ",
     ls: (args, cwd) => {

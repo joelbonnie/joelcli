@@ -76,8 +76,17 @@ export const fileSystem = {
       },
       newdir: {
         type: "directory",
-        children: {},
+        children: {
+          temp: {
+            type: "file",
+            content: "this is another file",
+          },
+          newdir2: {
+            type: "directory",
+            children: {},
+        },
       },
     },
   },
+},
 }
