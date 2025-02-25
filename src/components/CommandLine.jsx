@@ -1,13 +1,76 @@
 import React, { useState } from 'react';
-import { directories } from '../data/directories.js';
+import { directories, fileSystem } from '../data/directories.js';
+import {introMessage} from '../data/intro.js'
 import './CommandLine.css';
 
-const CommandLine = ({ commands }) => {
+const CommandLine = () => {
+
   const [input, setInput] = useState('');
-  const [commandHistory, setCommandHistory] = useState([]);
-  const [currentDir, setCurrentDir] = useState(directories);
+  const [commandHistory, setCommandHistory] = useState([{input:"", output:introMessage}]);
+  const [currentPath, setCurrentPath] = useState([]);
 
+  const getDirectory = (path) => {
+    return path.reduce((dir, key) => {
+      if (dir && dir.children && dir.children[key]) {
+        return dir.children[key];
+      }
+      return null; 
+    }, fileSystem.root); 
+  };
 
+  const changeDirectory = (path, target) => {
+    const dir = getDirectory(path);
+    if (dir && dir.type === 'directory' && dir.children[target] && dir.children[target].type === 'directory') {
+      return [...path, target];
+    } else {
+      return path;
+    }
+  };
+
+  const commands = {
+    help: () => "Welcome to joelexia.net!\nHere's a CLI to learn about my projects, experiences and more :D\n\n"+
+    "Some help with commands:\n"+
+    "Try typing ls to see content of the root directory\nAnd ls [directoryName] to see the content of directory [directoryName]\n" +
+    "Type cat [fileName] to view the content of file [fileName]\n"+
+    "Type cd [directoryName] to change the current directory.\n"+
+    "Type clear to clear the screen!\n\n"+
+    "Definitely don't type nggyu (wink wink)\n\n"+
+    "Have fun! ʕっ•ᴥ•ʔっ💕",
+    nggyu: () => "Never gonna give you up\nNever gonna let you down\n"+
+"Never gonna run around and desert you\nNever gonna make you cry\n"+
+"Never gonna say goodbye\nNever gonna tell a lie and hurt you\n\n ʕ •`ᴥ•´ʔ\n ",
+    ls: (args, cwd) => {
+      let targetPath;
+
+      if (args.length === 0) {
+        targetPath = cwd;
+      } else {
+        const inputPath = args;
+        if (inputPath.startsWith('/')) {
+          targetPath = inputPath.split('/').filter(Boolean);
+        } else {
+          targetPath = [...cwd, ...inputPath.split('/').filter(Boolean)];
+        }
+      }
+
+      console.log(targetPath);
+      const dir = getDirectory(targetPath);
+      console.log(dir);
+      if (dir && dir.type === 'directory') {
+        return Object.keys(dir.children).join('\n');
+      } else {
+        return `ls: cannot access '${args || ''}': No such directory`;
+      }
+    },
+
+    cat: (fileName) => {
+      const dir = getDirectory(currentPath);
+      if (fileName in dir.children) {
+        return dir.children[fileName].content;
+      }
+      return `No such file: ${fileName}`; 
+    },
+  };
   const handleInputChange = (e) => {
     setInput(e.target.value);
   };
@@ -18,21 +81,33 @@ const CommandLine = ({ commands }) => {
       const args = input.split(' ');
       const command = args[0];
       const commandArg = args[1] || '';
+      const formatted_input = "> " + input;
 
-      console.log(command);
       if (command == 'ls') {
-        const output = handleLS(commandArg) + "\n";
-        setCommandHistory([...commandHistory, {input, output}]);
+        const output = commands.ls(commandArg, currentPath) + "\n";
+        setCommandHistory([...commandHistory, {input: formatted_input, output}]);
+      
       } else if (command == 'cat') {
-        const output = handleCAT(commandArg) + "\n";
-        setCommandHistory([...commandHistory, {input, output}]);
+        const output = commands.cat(commandArg) + "\n";
+        setCommandHistory([...commandHistory, {input: formatted_input, output}]);
+     
+      } else if (command == 'cd') {
+        const output = command.cat(commandArg) + "\n";
+        setCommandHistory([...commandHistory, {input: formatted_input, output}]);
+     
+      } else if (command == 'echo') {
+        const output = commandArg+"\n"
+        setCommandHistory([...commandHistory, {input: formatted_input, output}]);
+
       } else if (command == 'clear') {
         setCommandHistory([]);
+      
       } else if (commands[command]) {
         const output = commands[command]();
-        setCommandHistory([...commandHistory, { input, output }]);
+        setCommandHistory([...commandHistory, {input: formatted_input, output }]);
+      
       } else {
-        setCommandHistory([...commandHistory, { input, output: 'Command Not Found (｡•́︿•̀｡)  Try typing help!\n' }]);
+        setCommandHistory([...commandHistory, {input: formatted_input, output: 'Command Not Found (｡•́︿•̀｡)  Try typing help\n' }]);
       }
       
     
@@ -40,69 +115,31 @@ const CommandLine = ({ commands }) => {
     }
   };
 
-
-  const handleLS = (dirName) => {
-    if (dirName == '') {
-      return Object.keys(currentDir).join(' ');
-    } else if (currentDir[dirName]) {
-      if (typeof currentDir[dirName] === 'object') {
-        return Object.keys(currentDir[dirName]).join(' ');
-      } else {
-        return `Not a directory: ${dirName}`;
-      }
-
-    } else {
-      return `No such directory: ${dirName}`;
-    }
-  };
-
-  const handleCAT = (fileName) => {
-
-
-    for (let dir in currentDir) {
-      if (currentDir[dir][fileName]) {
-        return currentDir[dir][fileName];
-      }
-    }
-    return `No such file: ${fileName}`; 
-  };
-
   return (
-    <div className="commandline"> 
-
-    <div className="commandline-output">
-      {commandHistory.map((entry, index) => (
-        <div key={index}>
-        <span> {entry.input} </span>
-        <div> {entry.output} </div>
+      <>
+        <div className="commandline">
+          <div className="commandline-output">
+            {commandHistory.map((entry, index) => (
+              <div key={index}>
+                <span>{entry.input}</span>
+                <div>{entry.output}</div>
+              </div>
+            ))}
+          </div>
+    
+          <div className="commandline-prompt">
+            <span className="prompt-symbol">&gt;</span>
+            <textarea
+              value={input}
+              className="commandline-input"
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
+              autoFocus
+            />
+          </div>
         </div>
-      ))}
-    </div>
-
-      <div className="commandline-prompt">
-        <span className='prompt-symbol'>&gt;</span>
-      
-      <textarea
-      value={input}
-      className="commandline-input"
-      onChange={handleInputChange}
-      onKeyDown = {handleKeyDown}
-      style={{
-        border:'none', 
-        outline: 'none',
-        // resize: 'none',
-        fontFamily: 'monospace',
-      }}
-      rows={1}
-      // onInput={(e) => {
-      //   e.target.style.height = 'auto';
-      //   e.target.style.height = `${e.target.scrollHeight}px`;
-      // }}
-      autoFocus
-      />
-      </div>
-    </div>
-  );
+      </>
+    );
 };
 
 

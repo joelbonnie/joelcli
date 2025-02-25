@@ -62,3 +62,64 @@ export const directories = {
     'Bash Scripting, Virtualization and Hypervisors, Docker, LaTeX',
   },  
 }
+
+
+
+
+export const fileSystem = {
+  root: {
+    type: "directory",
+    children: {
+      whoami: {
+        type: "file",
+        content: "Hi! I'm Joel Bonnie! I'm a fourth year student at UBC studying Computer Science and Statistics :D\n"
+      },
+      education: {
+        type: "directory",
+        children: {
+          temp: {
+            type: "file",
+            content: "this is a file"
+          },
+        },
+      },
+      experiences: {
+        type: "directory",
+        children: {
+          temp: {
+            type: "file",
+            content: "this is a file"
+          },
+        },
+      },
+      projects: {
+        type: "directory",
+        children: {
+          temp: {
+            type: "file",
+            content: "this is a file"
+          },
+        },
+      },
+      extracurriculars: {
+        type: "directory",
+        children: {
+          temp: {
+            type: "file",
+            content: "this is a file"
+          },
+        }
+      },
+      skills: {
+        type: "directory",
+        children: {
+          temp: {
+            type: "file",
+            content: "this is a file"
+          },
+        },
+      },  
+    },
+  },
+}
+
