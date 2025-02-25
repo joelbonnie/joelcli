@@ -53,12 +53,20 @@ const CommandLine = () => {
 
       console.log(targetPath);
       const dir = getDirectory(targetPath);
-      // console.log(dir);
+      console.log(dir);
       if (dir && dir.type === 'directory') {
         return Object.keys(dir.children).join('\n');
       } else {
         return `ls: cannot access '${args || ''}': No such directory`;
       }
+    },
+
+    cat: (fileName) => {
+      const dir = getDirectory(currentPath);
+      if (fileName in dir.children) {
+        return dir.children[fileName].content;
+      }
+      return `No such file: ${fileName}`; 
     },
   };
   const handleInputChange = (e) => {
@@ -71,47 +79,39 @@ const CommandLine = () => {
       const args = input.split(' ');
       const command = args[0];
       const commandArg = args[1] || '';
+      const formatted_input = "> " + input;
 
       if (command == 'ls') {
         const output = commands.ls(commandArg, currentPath) + "\n";
-        setCommandHistory([...commandHistory, {input, output}]);
+        setCommandHistory([...commandHistory, {input: formatted_input, output}]);
       
       } else if (command == 'cat') {
-        const output = handleCAT(commandArg) + "\n";
-        setCommandHistory([...commandHistory, {input, output}]);
+        const output = commands.cat(commandArg) + "\n";
+        setCommandHistory([...commandHistory, {input: formatted_input, output}]);
+     
+      } else if (command == 'cd') {
+        const output = command.cat(commandArg) + "\n";
+        setCommandHistory([...commandHistory, {input: formatted_input, output}]);
      
       } else if (command == 'echo') {
         const output = commandArg+"\n"
-        setCommandHistory([...commandHistory, {input, output}]);
+        setCommandHistory([...commandHistory, {input: formatted_input, output}]);
 
       } else if (command == 'clear') {
         setCommandHistory([]);
       
       } else if (commands[command]) {
         const output = commands[command]();
-        setCommandHistory([...commandHistory, { input, output }]);
+        setCommandHistory([...commandHistory, {input: formatted_input, output }]);
       
       } else {
-        setCommandHistory([...commandHistory, { input, output: 'Command Not Found (｡•́︿•̀｡)  Try typing help\n' }]);
+        setCommandHistory([...commandHistory, {input: formatted_input, output: 'Command Not Found (｡•́︿•̀｡)  Try typing help\n' }]);
       }
       
     
       setInput('');
     }
   };
-
-
-  const handleCAT = (fileName) => {
-
-    const dir = getDirectory(currentPath);
-    if (fileName in dir.children) {
-      return dir.children[fileName].content;
-    }
-
-    return `No such file: ${fileName}`; 
-  };
-
-
 
   return (
       <>

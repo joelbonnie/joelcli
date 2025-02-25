@@ -74,6 +74,10 @@ export const fileSystem = {
         type: "file",
         content: "this is a file"
       },
+      newdir: {
+        type: "directory",
+        children: {},
+      },
     },
   },
 }
