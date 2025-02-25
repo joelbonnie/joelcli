@@ -3,44 +3,77 @@ import { directories, fileSystem } from '../data/directories.js';
 import {introMessage} from '../data/intro.js'
 import './CommandLine.css';
 
-const CommandLine = ({ commands }) => {
+const CommandLine = () => {
 
   const [input, setInput] = useState('');
   const [commandHistory, setCommandHistory] = useState([{input:"", output:introMessage}]);
-  const [currentDir, setCurrentDir] = useState(directories);
-  const [currentPath, setCurrentPath] = useState(['root']);
-
+  const [currentPath, setCurrentPath] = useState([]);
 
   const getDirectory = (path) => {
-    return path.slice(1).reduce((dir, key) => dir.children[key], fileSystem.root);
+    return path.reduce((dir, key) => {
+      if (dir && dir.children && dir.children[key]) {
+        return dir.children[key];
+      }
+      return null; 
+    }, fileSystem.root); 
   };
-
-  const getPathString = (path) => path.join('/');
 
   const changeDirectory = (path, target) => {
     const dir = getDirectory(path);
-    if (dir.children[target] && dir.children[target].type === 'directory') {
+    if (dir && dir.type === 'directory' && dir.children[target] && dir.children[target].type === 'directory') {
       return [...path, target];
     } else {
       return path;
     }
   };
 
+  const commands = {
+    help: () => "Welcome to joelexia.net!\nHere's a CLI to learn about my projects, experiences and more :D\n\n"+
+    "Some help with commands:\n"+
+    "Try typing ls to see content of the root directory\nAnd ls [directoryName] to see the content of directory [directoryName]\n" +
+    "Type cat [fileName] to view the content of file [fileName]\n"+
+    "Type clear to clear the screen!\n\n"+
+    "Have fun! ʕっ•ᴥ•ʔっ💕",
+    rickroll: () => "Never gonna give you up\nNever gonna let you down\n"+
+"Never gonna run around and desert you\nNever gonna make you cry\n"+
+"Never gonna say goodbye\nNever gonna tell a lie and hurt you\n\n ʕ •`ᴥ•´ʔ\n ",
+    ls: (args, cwd) => {
+      let targetPath;
+
+      if (args.length === 0) {
+        targetPath = cwd;
+      } else {
+        const inputPath = args;
+        if (inputPath.startsWith('/')) {
+          targetPath = inputPath.split('/').filter(Boolean);
+        } else {
+          targetPath = [...cwd, ...inputPath.split('/').filter(Boolean)];
+        }
+      }
+
+      console.log(targetPath);
+      const dir = getDirectory(targetPath);
+      // console.log(dir);
+      if (dir && dir.type === 'directory') {
+        return Object.keys(dir.children).join('\n');
+      } else {
+        return `ls: cannot access '${args || ''}': No such directory`;
+      }
+    },
+  };
   const handleInputChange = (e) => {
     setInput(e.target.value);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      console.log(fileSystem);
       e.preventDefault();
       const args = input.split(' ');
       const command = args[0];
       const commandArg = args[1] || '';
 
-      console.log(command);
       if (command == 'ls') {
-        const output = handleLS(commandArg) + "\n";
+        const output = commands.ls(commandArg, currentPath) + "\n";
         setCommandHistory([...commandHistory, {input, output}]);
       
       } else if (command == 'cat') {
@@ -68,43 +101,12 @@ const CommandLine = ({ commands }) => {
   };
 
 
-  const handleLS = (dirName) => {
-
-    const dir = getDirectory(currentPath);
-
-    return Object.keys(dir.children).join('  ');
-    
-    // TODO: add on relative / absolute paths
-
-    /*
-    if (dirName == '') {
-      return Object.keys(currentDir).join(' ');
-    } else if (currentDir[dirName]) {
-      if (typeof currentDir[dirName] === 'object') {
-        return Object.keys(currentDir[dirName]).join(' ');
-      } else {
-        return `Not a directory: ${dirName}`;
-      }
-
-    } else {
-      return `No such directory: ${dirName}`;
-    }
-    */
-  };
-
   const handleCAT = (fileName) => {
 
     const dir = getDirectory(currentPath);
     if (fileName in dir.children) {
       return dir.children[fileName].content;
     }
-    /*
-    for (let dir in currentDir) {
-      if (currentDir[dir][fileName]) {
-        return currentDir[dir][fileName];
-      }
-    }
-    */ 
 
     return `No such file: ${fileName}`; 
   };
