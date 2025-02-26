@@ -93,7 +93,8 @@ const CommandLine = () => {
           targetPath = [...currentPath, ...inputPath.split('/').filter(Boolean)];
         }
 
-        if (getDirectory(targetPath)) {
+        const dir = getDirectory(targetPath);
+        if (dir && dir['type'] == 'directory') {
           setCurrentPath(targetPath);
           return '';
         } else {
