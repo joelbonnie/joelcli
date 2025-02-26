@@ -18,44 +18,34 @@ const CommandLine = () => {
     }, fileSystem.root); 
   };
 
-  const changeDirectory = (path, target) => {
-    const dir = getDirectory(path);
-    if (dir && dir.type === 'directory' && dir.children[target] && dir.children[target].type === 'directory') {
-      return [...path, target];
-    } else {
-      return path;
-    }
-  };
-
   const commands = {
     help: () => "Welcome to joelexia.net!\nHere's a CLI to learn about my projects, experiences and more :D\n\n"+
     "Some help with commands:\n"+
-    "Try typing ls to see content of the root directory\nAnd ls [directoryName] to see the content of directory [directoryName]\n" +
+    "Try typing ls to see content of the root directory\n"+
     "Type cat [fileName] to view the content of file [fileName]\n"+
     "Type cd [directoryName] to change the current directory.\n"+
+    "Use cd .. to go back to the parent directory.\n"+
     "Type clear to clear the screen!\n\n"+
     "Definitely don't type nggyu (wink wink)\n\n"+
     "Have fun! ʕっ•ᴥ•ʔっ💕",
     nggyu: () => "Never gonna give you up\nNever gonna let you down\n"+
 "Never gonna run around and desert you\nNever gonna make you cry\n"+
 "Never gonna say goodbye\nNever gonna tell a lie and hurt you\n\n ʕ •`ᴥ•´ʔ\n ",
-    ls: (args, cwd) => {
+    ls: (args) => {
       let targetPath;
 
       if (args.length === 0) {
-        targetPath = cwd;
+        targetPath = currentPath;
       } else {
         const inputPath = args;
         if (inputPath.startsWith('/')) {
           targetPath = inputPath.split('/').filter(Boolean);
         } else {
-          targetPath = [...cwd, ...inputPath.split('/').filter(Boolean)];
+          targetPath = [...currentPath, ...inputPath.split('/').filter(Boolean)];
         }
       }
 
-      console.log(targetPath);
       const dir = getDirectory(targetPath);
-      console.log(dir);
       if (dir && dir.type === 'directory') {
         return Object.keys(dir.children).join('\n');
       } else {
@@ -64,12 +54,55 @@ const CommandLine = () => {
     },
 
     cat: (fileName) => {
-      const dir = getDirectory(currentPath);
-      if (fileName in dir.children) {
-        return dir.children[fileName].content;
+      let targetPath;
+      if (fileName.startsWith('/')) {
+        targetPath = fileName.split('/').filter(Boolean).slice(0,-1);
+      } else {
+        targetPath = [...currentPath, ...fileName.split('/').filter(Boolean)].slice(0,-1);
       }
-      return `No such file: ${fileName}`; 
+      const targetFile = [...fileName.split('/').filter(Boolean)].at(-1);
+      const dir = getDirectory(targetPath);
+      if (dir && targetFile in dir.children) {
+        if (dir.children[targetFile].type == "file") {
+          return dir.children[targetFile].content;
+        }
+        return `cat: ${fileName}: Is a directory`;
+        
+      }
+      return `cat: ${fileName}: No such file or directory`;
     },
+
+    cd: (args) => {
+      let targetPath;
+
+      if (args.length === 0) {
+        return '';
+      } else {
+        const inputPath = args;
+        if (inputPath == "..") {
+          if (currentPath.length > 0) {
+            targetPath = currentPath.slice(0, -1);
+            setCurrentPath(targetPath);
+          }
+          return '';
+        }
+
+        if (inputPath.startsWith('/')) {
+          targetPath = inputPath.split('/').filter(Boolean);
+        } else {
+          targetPath = [...currentPath, ...inputPath.split('/').filter(Boolean)];
+        }
+
+        if (getDirectory(targetPath)) {
+          setCurrentPath(targetPath);
+          return '';
+        } else {
+          return `cd: The directory '${args}' does not exist`
+        }
+      }
+    },
+
+
   };
   const handleInputChange = (e) => {
     setInput(e.target.value);
@@ -84,7 +117,7 @@ const CommandLine = () => {
       const formatted_input = "> " + input;
 
       if (command == 'ls') {
-        const output = commands.ls(commandArg, currentPath) + "\n";
+        const output = commands.ls(commandArg) + "\n";
         setCommandHistory([...commandHistory, {input: formatted_input, output}]);
       
       } else if (command == 'cat') {
@@ -92,7 +125,7 @@ const CommandLine = () => {
         setCommandHistory([...commandHistory, {input: formatted_input, output}]);
      
       } else if (command == 'cd') {
-        const output = command.cat(commandArg) + "\n";
+        const output = commands.cd(commandArg) + "\n";
         setCommandHistory([...commandHistory, {input: formatted_input, output}]);
      
       } else if (command == 'echo') {
