@@ -47,7 +47,11 @@ export const directories = {
   },
 
   extracurriculars: {
-    'csss': 'UBC Computer Science Student Society\n'+ 'Vice President Internal | Former Internal Officer\n' +
+    'bolt': 'Bolt UBC\nSoftware Developer and Statistics Advisor\n\n' + 
+    "Generated synthetic datasets based on trends in factors, and developed cases for Bolt's datathons.\n"+
+    "Developed and conducted Data Science and Machine Learning workshops for 50+ datathon competitors.\n"+
+    "Served on the developer team, prototyping and developing the Bolt website using React, Node and Supabase.\n",
+    'csss': 'UBC Computer Science Student Society\n'+ 'Vice President Internal | Former Internal Officer\n\n' +
     'Leading a team of Internal Officers, \nundertaking all internal proceedings of the official UBC CS department club. \n',
   },
 
@@ -66,14 +70,14 @@ export const fileSystem = {
   root: {
     type: "directory",
     children: {
-      whoami: {
+      "whoami.txt": {
         type: "file",
         content: "Hi! I'm Joel Bonnie! I'm a fourth year student at UBC studying Computer Science and Statistics :D\n"
       },
       education: {
         type: "directory",
         children: {
-          ubc: {
+          "ubc.txt": {
             type: "file",
             content: directories.education.ubc
           },
@@ -82,19 +86,19 @@ export const fileSystem = {
       experiences: {
         type: "directory",
         children: {
-          gis: {
+          "gis.txt": {
             type: "file",
             content: "Genomics ML Researcher: Description under construction!"
           },
-          minesense: {
+          "minesense.txt": {
             type: "file",
             content: "Data Scientist: Description under construction!"
           },
-          ta: {
+          "ta.txt": {
             type: "file",
             content: directories.experiences.ta
           },
-          freelance: {
+          "freelance.txt": {
             type: "file",
             content: directories.experiences.freelance
           },
@@ -103,35 +107,35 @@ export const fileSystem = {
       projects: {
         type: "directory",
         children: {
-          brainrotgpt: {
+          "brainrotgpt.txt": {
             type: "file",
             content: "Description under construction!"
           },
-          chitchart: {
+          "chitchart.txt": {
             type: "file",
             content: "Description under construction!"
           },
-          joelcli: {
+          "joelcli.txt": {
             type: "file",
             content: directories.projects.JoelCLI
           },
-          naturenexus: {
+          "naturenexus.txt": {
             type: "file",
             content: directories.projects.NatureNexus
           },
-          wouldtheystay: {
+          "wouldtheystay.txt": {
             type: "file",
             content: directories.projects.WouldTheyStay
           },
-          healthstatlogger: {
+          "healthstatlogger.txt": {
             type: "file",
             content: directories.projects.HealthStatLogger
           },
-          cybersecsalaries: {
+          "cybersecsalaries.txt": {
             type: "file",
             content: directories.projects.CyberSecSalaries
           },
-          tennisrankup: {
+          "tennisrankup.txt": {
             type: "file",
             content: directories.projects.TennisRankUp
           },
@@ -141,11 +145,11 @@ export const fileSystem = {
       extracurriculars: {
         type: "directory",
         children: {
-          bolt: {
+          "bolt.txt": {
             type: "file",
-            content: "Description under construction!"
+            content: directories.extracurriculars.bolt
           },
-          csss: {
+          "csss.txt": {
             type: "file",
             content: directories.extracurriculars.csss
           },
@@ -155,15 +159,15 @@ export const fileSystem = {
       skills: {
         type: "directory",
         children: {
-          languages: {
+          "languages.txt": {
             type: "file",
             content: directories.skills.languages
           },
-          frameworks: {
+          "frameworks.txt": {
             type: "file",
             content: directories.skills.frameworks
           },
-          tools: {
+          "tools.txt": {
             type: "file",
             content: directories.skills.tools
           },
