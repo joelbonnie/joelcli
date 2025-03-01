@@ -102,6 +102,14 @@ const CommandLine = () => {
         }
       }
     },
+    pwd: () => {
+      if (currentPath.length == 0) return "/";
+      let current_path_str = ""
+      for (const curr_path_elem of currentPath) {
+        current_path_str += "/" + curr_path_elem;
+      }
+      return current_path_str;
+    },
 
 
   };
@@ -131,6 +139,10 @@ const CommandLine = () => {
      
       } else if (command == 'echo') {
         const output = commandArg+"\n"
+        setCommandHistory([...commandHistory, {input: formatted_input, output}]);
+
+      } else if (command == 'pwd') {
+        const output = commands.pwd()+"\n"
         setCommandHistory([...commandHistory, {input: formatted_input, output}]);
 
       } else if (command == 'clear') {
