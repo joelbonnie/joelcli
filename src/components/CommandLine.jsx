@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { directories, fileSystem } from '../data/directories.js';
 import {introMessage} from '../data/intro.js'
 import './CommandLine.css';
@@ -7,7 +7,17 @@ const CommandLine = () => {
 
   const [input, setInput] = useState('');
   const [commandHistory, setCommandHistory] = useState([{input:"", output:introMessage}]);
+  const [inputHistory, setInputHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(null);
   const [currentPath, setCurrentPath] = useState([]);
+
+  const outputRef = useRef(null);
+
+  useEffect(() => {
+    if (outputRef.current) {
+      outputRef.current.scrollTop = outputRef.current.scrollHeight; 
+    }
+  }, [commandHistory]); 
 
   const getDirectory = (path) => {
     return path.reduce((dir, key) => {
@@ -120,6 +130,11 @@ const CommandLine = () => {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
+
+      setInputHistory((prev) => [...prev, input]);
+      setHistoryIndex(null);
+
+
       const args = input.split(' ');
       const command = args[0];
       const commandArg = args[1] || '';
@@ -158,13 +173,33 @@ const CommandLine = () => {
       
     
       setInput('');
+      setHistoryIndex(null);
     }
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setHistoryIndex((prevIndex) => {
+        const newIndex = prevIndex === null ? inputHistory.length - 1 : Math.max(prevIndex - 1, 0);
+        setInput(inputHistory[newIndex] || '');
+        return newIndex;
+      });
+    }
+  
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setHistoryIndex((prevIndex) => {
+        if (prevIndex === null) return null;
+        const newIndex = prevIndex < inputHistory.length - 1 ? prevIndex + 1 : null;
+        setInput(newIndex !== null ? inputHistory[newIndex] : '');
+        return newIndex;
+      });
+    }  
   };
 
   return (
       <>
         <div className="commandline">
-          <div className="commandline-output">
+          <div className="commandline-output" ref = {outputRef}>
             {commandHistory.map((entry, index) => (
               <div key={index}>
                 <span>{entry.input}</span>

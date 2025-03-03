@@ -29,8 +29,32 @@
   white-space: pre-wrap; 
   word-wrap: break-word; 
 
+  scroll-behavior: smooth;
+
+  /* Firefox */
+  scrollbar-width: thin; 
+  scrollbar-color: #F2B3A2 transparent; 
 
 }
+
+.commandline-output::-webkit-scrollbar {
+  width: 8px;
+}
+
+.commandline-output::-webkit-scrollbar-thumb {
+  background-color: #F2B3A2; 
+  border-radius: 4px;
+}
+
+.commandline-output::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.commandline-output:hover::-webkit-scrollbar-thumb {
+  background-color: #F2B3A2;
+}
+
+
 .commandline-prompt {
   display: flex;
   align-items: baseline; 
