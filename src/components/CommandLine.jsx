@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { directories, fileSystem } from '../data/directories.js';
 import {introMessage} from '../data/intro.js'
 import './CommandLine.css';
@@ -8,6 +8,14 @@ const CommandLine = () => {
   const [input, setInput] = useState('');
   const [commandHistory, setCommandHistory] = useState([{input:"", output:introMessage}]);
   const [currentPath, setCurrentPath] = useState([]);
+
+  const outputRef = useRef(null);
+
+  useEffect(() => {
+    if (outputRef.current) {
+      outputRef.current.scrollTop = outputRef.current.scrollHeight; 
+    }
+  }, [commandHistory]); 
 
   const getDirectory = (path) => {
     return path.reduce((dir, key) => {
@@ -164,7 +172,7 @@ const CommandLine = () => {
   return (
       <>
         <div className="commandline">
-          <div className="commandline-output">
+          <div className="commandline-output" ref = {outputRef}>
             {commandHistory.map((entry, index) => (
               <div key={index}>
                 <span>{entry.input}</span>
