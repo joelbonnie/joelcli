@@ -20,8 +20,9 @@ function App() {
   return (
     <>
       <div className="App">
-      <h1> joelb.co<span className="blink">_</span> </h1>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '14px' }}>
+      <div className="header">
+        <h1> joelb.co<span className="blink">_</span> </h1>
+        <div className="social-icons">
           <a href="https://github.com/joelbonnie" target="_blank" rel="noopener noreferrer">
             <img src={Github} alt="GitHub" width="18" />
           </a>
@@ -29,6 +30,7 @@ function App() {
             <img src={Linkedin} alt="LinkedIn" width="18" />
           </a>
         </div>
+      </div>
       <CommandLine />
       </div>
     </>
