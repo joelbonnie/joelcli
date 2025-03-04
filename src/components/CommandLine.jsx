@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { directories, fileSystem } from '../data/directories.js';
-import {introMessage} from '../data/intro.js'
+import {introMessage, introMessageMobile} from '../data/intro.js'
 import './CommandLine.css';
 
 const CommandLine = () => {
 
+  const isMobile =  /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const selectedIntroMessage = isMobile ? introMessageMobile : introMessage;
+
   const [input, setInput] = useState('');
-  const [commandHistory, setCommandHistory] = useState([{input:"", output:introMessage}]);
+  const [commandHistory, setCommandHistory] = useState([{input:"", output:selectedIntroMessage}]);
   const [inputHistory, setInputHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(null);
   const [currentPath, setCurrentPath] = useState([]);
