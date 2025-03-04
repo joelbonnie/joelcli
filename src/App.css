@@ -9,6 +9,6 @@
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  font-family:'Monaco',  monospace;
+  font-family:'Monaco',  monospace, 'Noto Sans';
   overflow: hidden;
 }
