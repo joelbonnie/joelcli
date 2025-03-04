@@ -9,4 +9,4 @@ export const introMessage = ""+
                                                                                  
 
 export const introMessageMobile = ""+
-"Hi!! Welcome to my website :D\n  For a small guide on using this terminal type help\n\n"
+"Hi!! Welcome to my website :D\nFor a small guide on using this terminal type help\n\n"
