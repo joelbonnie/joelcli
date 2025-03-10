@@ -32,7 +32,7 @@ const CommandLine = () => {
   };
 
   const commands = {
-    help: () => "Welcome to joelexia.net!\nHere's a CLI to learn about my projects, experiences and more :D\n\n"+
+    help: () => "Welcome to joelb.co!\nHere's a CLI to learn about my projects, experiences and more :D\n\n"+
     "Some help with commands:\n"+
     "Try typing ls to see content of the root directory\n"+
     "Type cat [fileName] to view the content of file [fileName]\n"+
