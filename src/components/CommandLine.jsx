@@ -32,13 +32,17 @@ const CommandLine = () => {
   };
 
   const commands = {
-    help: () => "Welcome to joelb.co!\nHere's a CLI to learn about my projects, experiences and more :D\n\n"+
-    "Some help with commands:\n"+
-    "Try typing ls to see content of the root directory\n"+
+    help: () => "Welcome to joelb.co!\nHere's a terminal to learn about my projects, experiences and more :D\n\n"+
+    "Some help with commands:\n\n"+
+    "Type ls to see the contents of a directory\n"+
     "Type cat [fileName] to view the content of file [fileName]\n"+
-    "Type cd [directoryName] to change the current directory.\n"+
-    "Use cd .. to go back to the parent directory.\n"+
+    "Type cd [directoryName] to change the current directory\n"+
+    "Use cd .. to go back to the parent directory\n"+
+    "Use pwd to print the current working directory\n"+
     "Type clear to clear the screen!\n\n"+
+    "To cycle through previous commands use the up and down key\n"+
+    "For ls, cat and cd both relative and absolute paths work! \n\n"+
+
     "Definitely don't type nggyu (wink wink)\n\n"+
     "Have fun! ʕっ•ᴥ•ʔっ💕",
     nggyu: () => "Never gonna give you up\nNever gonna let you down\n"+
